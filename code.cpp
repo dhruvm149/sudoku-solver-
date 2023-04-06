@@ -2,7 +2,7 @@
 using namespace std;
 typedef long long int ll;
 
-bool check(vector<vector<int>> sudoku, int row, int column, int value)
+bool check(vector<vector<int>> &sudoku, int row, int column, int value)
 {
     for (int i = 0; i < 9; i++)
     {
@@ -12,8 +12,8 @@ bool check(vector<vector<int>> sudoku, int row, int column, int value)
         }
     }
 
-    int square_row_start = row / 3;
-    int square_column_start = column / 3;
+    int square_row_start = (row / 3) * 3;
+    int square_column_start = (column / 3) * 3;
 
     for (int i = square_row_start; i < square_row_start + 3; i++)
     {
@@ -31,9 +31,9 @@ bool check(vector<vector<int>> sudoku, int row, int column, int value)
 
 bool sudokusolver(vector<vector<int>> &sudoku, int row, int column)
 {
-    if (sudoku[row][column] != 0)
+    if (row == 9)
     {
-        return sudokusolver(sudoku, row, column + 1);
+        return true;
     }
 
     if (column == 9)
@@ -41,9 +41,9 @@ bool sudokusolver(vector<vector<int>> &sudoku, int row, int column)
         return sudokusolver(sudoku, row + 1, 0);
     }
 
-    if (row == 9)
+    if (sudoku[row][column] != 0)
     {
-        return true;
+        return sudokusolver(sudoku, row, column + 1);
     }
 
     for (int i = 1; i <= 9; i++)
@@ -102,7 +102,7 @@ int main()
     }
     else
     {
-        cout<<"This sudoku can't be solved please input a solvable sudoku"<<endl;
+        cout << "This sudoku can't be solved please input a solvable sudoku" << endl;
     }
 
     return 0;
