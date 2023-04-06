@@ -86,7 +86,24 @@ int main()
         }
     }
 
-    bool solve=sudokusolver(sudoku,0,0);
+    bool solve = sudokusolver(sudoku, 0, 0);
+
+    if (solve)
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                cout << sudoku[i][j] << " ";
+            }
+
+            cout << endl;
+        }
+    }
+    else
+    {
+        cout<<"This sudoku can't be solved please input a solvable sudoku"<<endl;
+    }
 
     return 0;
 }
